@@ -1,0 +1,59 @@
+# ── Environment & Secrets ──────────────────────────────────
+.env
+.env.*
+.env.local
+.env.*.local
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.cer
+*.der
+*.pub
+id_rsa
+id_ed25519
+secrets.json
+secrets.yaml
+secrets.yml
+credentials.json
+service-account*.json
+
+# ── Logs ───────────────────────────────────────────────────
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── OS / Editor files ──────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ── Build / Dependency folders ─────────────────────────────
+node_modules/
+dist/
+build/
+out/
+.next/
+.nuxt/
+.cache/
+.parcel-cache/
+vendor/
+
+# ── Misc ────────────────────────────────────────────────────
+*.zip
+*.tar.gz
+*.bak
+*.tmp

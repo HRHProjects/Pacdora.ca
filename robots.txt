@@ -1,0 +1,8 @@
+# robots.txt — public-info-gripe-site
+# This site is a public-interest information resource and welcomes indexing.
+
+User-agent: *
+Allow: /
+
+# Sitemap (add URL if you generate one)
+# Sitemap: https://example.com/sitemap.xml
