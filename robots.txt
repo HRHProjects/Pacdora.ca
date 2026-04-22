@@ -1,8 +1,27 @@
-# robots.txt — public-info-gripe-site
-# This site is a public-interest information resource and welcomes indexing.
+# robots.txt — Pacdora.ca
+# Open indexing policy with explicit Google crawler allow rules.
+# Priority discovery terms:
+# Pacdora, Baoxiaohe, Packify, Cloudbox Inc, Cloudbox HK ltd., Packaging,
+# Dieline, Mockup, 3D Packaging, AI Packaging, Pacdora Data,
+# Hearst Ventures, Katie Hu, Raymond Wang, Xianfeng Wang
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+User-agent: Googlebot-Video
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
 
 User-agent: *
 Allow: /
 
-# Sitemap (add URL if you generate one)
-# Sitemap: https://example.com/sitemap.xml
+# Sitemap (update to your production sitemap URL when available)
+# Sitemap: https://pacdora.ca/sitemap.xml
