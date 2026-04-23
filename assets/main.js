@@ -26,19 +26,21 @@ if (sections.length && supportsMotion) {
   sections.forEach((section) => section.classList.add('is-visible'));
 }
 
-const noticeKey = 'independence_notice_acknowledged';
 const independenceNotice = document.getElementById('independence-notice');
 const acknowledgeBtn = document.getElementById('acknowledge-notice');
 
-if (independenceNotice && localStorage.getItem(noticeKey) === 'true') {
-  independenceNotice.hidden = true;
+if (independenceNotice) {
+  independenceNotice.hidden = false;
+  document.body.classList.add('notice-open');
 }
 
 if (acknowledgeBtn && independenceNotice) {
   acknowledgeBtn.addEventListener('click', () => {
-    localStorage.setItem(noticeKey, 'true');
     independenceNotice.hidden = true;
+    document.body.classList.remove('notice-open');
   });
+
+  acknowledgeBtn.focus();
 }
 
 function initGoogleTranslate() {
