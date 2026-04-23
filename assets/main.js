@@ -9,23 +9,36 @@ if (sections.length && supportsMotion) {
   document.body.classList.add('js-enhanced');
 
   const sectionObserver = new IntersectionObserver(
-    (entries, observer) => {
+    (entries) => {
       entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
+        entry.target.classList.toggle('is-visible', entry.isIntersecting);
       });
     },
     {
       root: null,
-      threshold: 0.16,
-      rootMargin: '0px 0px -10% 0px',
+      threshold: 0.2,
+      rootMargin: '0px 0px -8% 0px',
     }
   );
 
   sections.forEach((section) => sectionObserver.observe(section));
 } else {
   sections.forEach((section) => section.classList.add('is-visible'));
+}
+
+const noticeKey = 'independence_notice_acknowledged';
+const independenceNotice = document.getElementById('independence-notice');
+const acknowledgeBtn = document.getElementById('acknowledge-notice');
+
+if (independenceNotice && localStorage.getItem(noticeKey) === 'true') {
+  independenceNotice.hidden = true;
+}
+
+if (acknowledgeBtn && independenceNotice) {
+  acknowledgeBtn.addEventListener('click', () => {
+    localStorage.setItem(noticeKey, 'true');
+    independenceNotice.hidden = true;
+  });
 }
 
 function initGoogleTranslate() {
