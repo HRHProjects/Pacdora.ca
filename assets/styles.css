@@ -1,15 +1,15 @@
 :root {
-  --bg: #081224;
-  --bg-soft: #0f1f39;
-  --card: rgba(15, 31, 57, 0.75);
-  --text: #e7edf8;
-  --muted: #a9b8d4;
-  --accent: #6ea8fe;
-  --accent-2: #5eead4;
+  --bg: #06142b;
+  --bg-soft: #11284a;
+  --card: rgba(18, 42, 76, 0.72);
+  --text: #e8eef8;
+  --muted: #b3c2d9;
+  --accent: #7cb2ff;
+  --accent-2: #8ee9dd;
   --warn: #fbbf24;
   --ok: #34d399;
-  --border: rgba(173, 196, 255, 0.22);
-  --shadow: 0 20px 50px rgba(3, 10, 24, 0.45);
+  --border: rgba(184, 205, 240, 0.28);
+  --shadow: 0 20px 50px rgba(3, 10, 24, 0.5);
 }
 
 * { box-sizing: border-box; }
@@ -18,7 +18,7 @@ html { scroll-behavior: smooth; }
 body {
   font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color: var(--text);
-  background: #001f5b;
+  background: radial-gradient(circle at 20% 0%, #17386a 0%, #0a1e40 34%, #051327 100%);
   line-height: 1.65;
   overflow-x: hidden;
 }
@@ -82,7 +82,7 @@ a:hover { color: #d4ebff; }
   padding: 2rem;
   border: 1px solid var(--border);
   border-radius: 20px;
-  background: linear-gradient(155deg, rgba(14, 31, 57, 0.88), rgba(8, 18, 36, 0.95));
+  background: linear-gradient(155deg, rgba(20, 46, 82, 0.92), rgba(10, 24, 48, 0.97));
   box-shadow: var(--shadow);
 }
 
@@ -114,14 +114,14 @@ h1 span { color: #9ac4ff; }
 }
 
 #disclaimer-banner {
-  background: rgba(251, 191, 36, 0.09);
+  background: rgba(255, 196, 74, 0.12);
   border-color: rgba(251, 191, 36, 0.28);
 }
 
 #disclaimer-banner .label { font-weight: 800; margin-right: 0.3rem; }
 
 #not-portal {
-  background: rgba(110, 168, 254, 0.1);
+  background: rgba(124, 178, 255, 0.14);
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.6rem;
@@ -238,7 +238,7 @@ h2 { margin: 0.2rem 0 0.65rem; font-size: 1.35rem; }
   padding: 1rem;
   border-radius: 14px;
   border: 1px solid var(--border);
-  background: rgba(8, 17, 34, 0.55);
+  background: rgba(12, 28, 54, 0.72);
 }
 
 .contact-card .org { margin: 0 0 0.6rem; font-weight: 800; }
@@ -265,7 +265,7 @@ h2 { margin: 0.2rem 0 0.65rem; font-size: 1.35rem; }
   padding: 0.6rem 1rem;
   border-radius: 999px;
   border: 1px solid rgba(110, 168, 254, 0.7);
-  background: rgba(110, 168, 254, 0.18);
+  background: rgba(124, 178, 255, 0.2);
   color: #ddecff;
   text-decoration: none;
   font-weight: 700;
@@ -274,14 +274,14 @@ h2 { margin: 0.2rem 0 0.65rem; font-size: 1.35rem; }
 
 .right-of-reply-btn:hover {
   transform: translateY(-1px);
-  background: rgba(110, 168, 254, 0.34);
+  background: rgba(124, 178, 255, 0.38);
 }
 
 .notice-overlay {
   position: fixed;
   inset: 0;
   z-index: 60;
-  background: rgba(0, 10, 35, 0.75);
+  background: rgba(2, 10, 28, 0.86);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -295,10 +295,14 @@ h2 { margin: 0.2rem 0 0.65rem; font-size: 1.35rem; }
 .notice-card {
   width: min(760px, 100%);
   border: 1px solid rgba(251, 191, 36, 0.5);
-  background: #0a1f4f;
+  background: linear-gradient(150deg, #173765 0%, #0a1f46 100%);
   border-radius: 16px;
   box-shadow: var(--shadow);
   padding: 1.2rem;
+}
+
+body.notice-open {
+  overflow: hidden;
 }
 
 #acknowledge-notice {
