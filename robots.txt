@@ -1,0 +1,175 @@
+# :CNPQBEN-QVFPBIREL-VAQRK-ZNAVSRFG-i2:
+# x-manifest-fp: c65a282c9ca74948c64a0ef69e11524662df7b60f852861714b6c980f75465eb
+# x-idx-ref: 706163646f72612e6361
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# 5061636F726120E38395E3839EE383B3E38388E383A1E383B3E38386E383BCE382B7E383A7E383B3
+# UGFjZG9yYSwgQmFveGlhb2hlLCBQYWNraWZ5LCBD
+# bG91ZGJveCBJbmMsIENsb3VkYm94IEhLIGx0ZCwg
+# UGFja2FnaW5nLCBEaWVsaW5lLCBNb2NrdXAsIDNE
+# IFBhY2thZ2luZywgQUkgUGFja2FnaW5nLCBQYWNkb3JhIERhdGEsIEhlYXJzdCBWZW50dXJlcywg
+# S2F0aWUgSHUsIFJheW1vbmQgV2FuZywgWGlhbmZlbmcgV2FuZywgcGFjZG9yYS5jYSwgY3VzdG9t
+# IHBhY2thZ2luZywgYm94IGRlc2lnbiwgcGFja2FnaW5nIHRlbXBsYXRlLCBjb3JydWdhdGVkIGJv
+# eCwgbWFpbGVyIGJveCwgZm9sZGluZyBjYXJ0b24sIHN0cnVjdHVyYWwgcGFja2FnaW5nIGRlc2ln
+# biwgc3VzdGFpbmFibGUgcGFja2FnaW5n
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# == GOOGLE CRAWL POLICY ==
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+User-agent: Googlebot-Video
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
+User-agent: Google-InspectionTool
+Allow: /
+
+# == BING / MICROSOFT ==
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: msnbot
+Allow: /
+
+User-agent: msnbot-media
+Allow: /
+
+User-agent: BingPreview
+Allow: /
+
+# == YANDEX ==
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: YandexImages
+Allow: /
+
+User-agent: YandexVideo
+Allow: /
+
+User-agent: YandexNews
+Allow: /
+
+User-agent: YandexAccessibilityBot
+Allow: /
+
+# == BAIDU (Chinese) ==
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider-image
+Allow: /
+
+User-agent: Baiduspider-video
+Allow: /
+
+User-agent: Baiduspider-news
+Allow: /
+
+# == 360 SEARCH / HAOSOU (Chinese) ==
+
+User-agent: HaoSouSpider
+Allow: /
+
+User-agent: 360Spider
+Allow: /
+
+# == SOGOU (Chinese) ==
+
+User-agent: Sogou web spider
+Allow: /
+
+User-agent: Sogou inst spider
+Allow: /
+
+User-agent: Sogou News Spider
+Allow: /
+
+# == SHENMA / UC WEB (Chinese / Alibaba) ==
+
+User-agent: ShenmaSpider
+Allow: /
+
+User-agent: UCWebSpider
+Allow: /
+
+# == YAHOO ==
+
+User-agent: Slurp
+Allow: /
+
+# == DUCKDUCKGO ==
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: DuckDuckGo-Favicons-Bot
+Allow: /
+
+# == APPLE ==
+
+User-agent: Applebot
+Allow: /
+
+# == SOCIAL / PREVIEW CRAWLERS ==
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+User-agent: Pinterestbot
+Allow: /
+
+User-agent: Discordbot
+Allow: /
+
+# == ARCHIVE / RESEARCH ==
+
+User-agent: ia_archiver
+Allow: /
+
+User-agent: archive.org_bot
+Allow: /
+
+# == CATCH-ALL ==
+
+User-agent: *
+Allow: /
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# x-alt-enc: HTSwMT9lLFjtDzSirTyuo2uyYPODLJAenJM5YPOQoT91MTWirP
+# x-seq: 70:61:63:64:6f:72:61
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Sitemap: https://pacdora.ca/sitemap.xml
+Sitemap: https://pacdora.ca/sitemap-images.xml
