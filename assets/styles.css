@@ -1,7 +1,7 @@
 :root {
   --bg: #06142b;
   --bg-soft: #11284a;
-  --card: rgba(18, 42, 76, 0.72);
+  --card: rgba(9, 20, 43, 0.78);
   --text: #e8eef8;
   --muted: #b3c2d9;
   --accent: #7cb2ff;
@@ -18,9 +18,29 @@ html { scroll-behavior: smooth; }
 body {
   font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color: var(--text);
-  background: radial-gradient(circle at 20% 0%, #17386a 0%, #0a1e40 34%, #051327 100%);
+  background-color: #020a23;
   line-height: 1.65;
   overflow-x: hidden;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(115deg, rgba(2, 10, 33, 0.48) 14%, rgba(2, 10, 33, 0.78) 65%),
+    url("/assets/landing-bg.svg") center / cover no-repeat;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 72% 38%, rgba(255, 78, 126, 0.16), transparent 40%);
+  pointer-events: none;
 }
 
 a { color: #b6dbff; }
