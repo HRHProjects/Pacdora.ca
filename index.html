@@ -116,8 +116,40 @@
       <p>Check Back soon</p>
     </section>
 
-    <section id="contact" class="section" aria-labelledby="h-contact">
+    <section id="incident-reporting" class="section" aria-labelledby="h-incident-reporting">
       <p class="section-label">§ 7</p>
+      <h2 id="h-incident-reporting">Report a Data Incident by Country</h2>
+      <p>
+        Select your country to open the official regulator page that explains how to report a data-protection or privacy incident.
+      </p>
+
+      <div class="country-reporting" role="group" aria-label="Country data incident reporting directory">
+        <label for="country-select">Choose your country</label>
+        <div class="country-reporting-controls">
+          <select id="country-select" name="country">
+            <option value="">Select a country</option>
+            <option value="eu">European Union (GDPR)</option>
+            <option value="ca">Canada</option>
+            <option value="uk">United Kingdom</option>
+            <option value="us">United States</option>
+            <option value="au">Australia</option>
+            <option value="nz">New Zealand</option>
+            <option value="jp">Japan</option>
+            <option value="ie">Ireland</option>
+            <option value="in">India</option>
+            <option value="cn">China</option>
+            <option value="sg">Singapore</option>
+          </select>
+          <button id="country-regulation-link" type="button">Open incident reporting resource</button>
+        </div>
+        <p id="country-reporting-note" class="country-reporting-note" aria-live="polite">
+          Tip: this opens in a new tab so you can keep this page open.
+        </p>
+      </div>
+    </section>
+
+    <section id="contact" class="section" aria-labelledby="h-contact">
+      <p class="section-label">§ 8</p>
       <h2 id="h-contact">Contact</h2>
       <p>
         Inquiries, correction requests, and media contact may be directed to the site operator below.
