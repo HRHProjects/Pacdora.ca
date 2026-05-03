@@ -16,6 +16,8 @@ const sectionFilter = document.getElementById('section-filter');
 const sectionSearch = document.getElementById('section-search');
 const emptyState = document.getElementById('empty-state');
 const toggleView = document.getElementById('toggle-view');
+const activeFilters = document.getElementById('active-filters');
+const clearFilters = document.getElementById('clear-filters');
 
 function renderSummary() {
   const grouped = noticeRecords.reduce((acc, item) => {
@@ -33,6 +35,16 @@ function renderFilterOptions() {
   sectionFilter.innerHTML = uniqueSections.map((name) => `<option value="${name}">${name}</option>`).join('');
 }
 
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function highlightMatch(text, searchValue) {
+  if (!searchValue) return text;
+  const pattern = new RegExp(`(${escapeRegExp(searchValue)})`, 'ig');
+  return text.replace(pattern, '<mark>$1</mark>');
+}
+
 function renderRecords() {
   const filterValue = sectionFilter.value;
   const searchValue = sectionSearch.value.trim().toLowerCase();
@@ -45,19 +57,37 @@ function renderRecords() {
 
   recordsContainer.innerHTML = visible
     .map((entry) => `
-      <article class="record-item">
-        <h3>${entry.title}</h3>
+      <article class="record-item" tabindex="0">
+        <h3>${highlightMatch(entry.title, searchValue)}</h3>
         <div class="record-meta">${entry.section} • ${entry.date} • ${entry.status}</div>
-        <p>${entry.body}</p>
-        <div>${entry.tags.map((tag) => `<span class="tag">${tag}</span>`).join('')}</div>
+        <p>${highlightMatch(entry.body, searchValue)}</p>
+        <div>${entry.tags.map((tag) => `<span class="tag">${highlightMatch(tag, searchValue)}</span>`).join('')}</div>
       </article>`)
     .join('');
 
-  emptyState.hidden = visible.length !== 0;
+  const hasResults = visible.length !== 0;
+  emptyState.hidden = hasResults;
+  activeFilters.textContent = hasResults
+    ? `Showing ${visible.length} of ${noticeRecords.length} record(s).`
+    : `No results for section "${filterValue}"${searchValue ? ` and search "${sectionSearch.value.trim()}"` : ''}.`;
+}
+
+function resetFilters() {
+  sectionFilter.value = 'All Sections';
+  sectionSearch.value = '';
+  renderRecords();
 }
 
 sectionFilter.addEventListener('change', renderRecords);
 sectionSearch.addEventListener('input', renderRecords);
+clearFilters.addEventListener('click', resetFilters);
+
+sectionSearch.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    sectionSearch.value = '';
+    renderRecords();
+  }
+});
 
 toggleView.addEventListener('click', () => {
   document.body.classList.toggle('compact');
@@ -79,14 +109,16 @@ const incidentReportingByCountry = {
   us: { label: 'United States', url: 'https://www.ncsl.org/technology-and-communication/security-breach-notification-laws' },
 };
 
-countrySelect.innerHTML = `<option value="">Select a country</option>${Object.entries(incidentReportingByCountry).map(([k,v])=>`<option value="${k}">${v.label}</option>`).join('')}`;
+countrySelect.innerHTML = `<option value="">Select a country</option>${Object.entries(incidentReportingByCountry).map(([k, v]) => `<option value="${k}">${v.label}</option>`).join('')}`;
 
 countryRegulationLink.addEventListener('click', () => {
   const selectedCountry = incidentReportingByCountry[countrySelect.value];
   if (!selectedCountry) {
     countryReportingNote.textContent = 'Please choose a country first.';
+    countryReportingNote.classList.add('warning');
     return;
   }
+  countryReportingNote.classList.remove('warning');
   countryReportingNote.textContent = `Opening the ${selectedCountry.label} incident reporting guidance in a new tab.`;
   window.open(selectedCountry.url, '_blank', 'noopener,noreferrer');
 });
