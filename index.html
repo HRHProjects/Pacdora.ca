@@ -1,73 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-CA">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="index, follow" />
-  <meta name="description" content="Independent public-interest information site. Not affiliated with, endorsed by, or operated by Pacdora, Baoxiaohe, Packify, or any related entity." />
-  <title>Public Information Notice — Independent Site</title>
+
+  <!-- ═══ Indexing & Crawl Directives ═══════════════════════════════════════ -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+  <!-- ═══ Primary SEO — Canadian Geo-Optimised ═════════════════════════════ -->
+  <title>Pacdora.ca — Independent Public Information Notice | Canadian Packaging Resource</title>
+  <meta name="description" content="Independent public-interest information resource. Canada's packaging reference for dielines, box design, and structural packaging templates. Free dielines for Canadian businesses. Not affiliated with Pacdora.com." />
+  <meta name="keywords" content="Pacdora Canada, Canada packaging design tool, free dielines Canadian businesses, packaging templates Canada, Canadian packaging solutions, box design Canada, corrugated box Canada, mailer box Canada, sustainable packaging Canada, folding carton Canada, structural packaging design Canada, AI packaging Canada" />
+  <meta name="language" content="en-CA" />
+  <meta name="geo.region" content="CA" />
+  <meta name="geo.placename" content="Canada" />
+
+  <!-- ═══ Canonical ════════════════════════════════════════════════════════ -->
+  <link rel="canonical" href="https://pacdora.ca/" />
+
+  <!-- ═══ Hreflang — Canadian Geo-Targeting Signals ═══════════════════════ -->
+  <!--  pacdora.ca  = authoritative for Canadian audiences (English & French) -->
+  <!--  pacdora.com = default for all other / global audiences               -->
+  <link rel="alternate" hreflang="en-CA" href="https://pacdora.ca/" />
+  <link rel="alternate" hreflang="fr-CA" href="https://pacdora.ca/fr/" />
+  <link rel="alternate" hreflang="en-US" href="https://pacdora.com/" />
+  <link rel="alternate" hreflang="x-default" href="https://pacdora.com/" />
+
+  <!-- ═══ Open Graph ═══════════════════════════════════════════════════════ -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pacdora.ca/" />
+  <meta property="og:title" content="Pacdora.ca — Independent Public Information Notice" />
+  <meta property="og:description" content="Independent public-interest information resource. Canada's packaging reference for dielines, structural design, and sustainable packaging solutions." />
+  <meta property="og:locale" content="en_CA" />
+  <meta property="og:locale:alternate" content="fr_CA" />
+  <meta property="og:site_name" content="Pacdora.ca" />
+
+  <!-- ═══ Twitter / X Card ═════════════════════════════════════════════════ -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Pacdora.ca — Independent Public Information Notice" />
+  <meta name="twitter:description" content="Independent public-interest information resource for Canadian users. Not affiliated with Pacdora.com." />
+
+  <!-- ═══ JSON-LD: Canadian Organisation Schema ════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Harmony Resource Hub Alberta Inc.",
+    "url": "https://pacdora.ca",
+    "email": "Admin@Harmonyresourcehub.ca",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "CA",
+      "addressRegion": "AB",
+      "addressLocality": "Alberta"
+    },
+    "foundingLocation": {
+      "@type": "Place",
+      "name": "Alberta, Canada"
+    },
+    "areaServed": [
+      { "@type": "AdministrativeArea", "name": "Alberta" },
+      { "@type": "AdministrativeArea", "name": "British Columbia" },
+      { "@type": "AdministrativeArea", "name": "Ontario" },
+      { "@type": "AdministrativeArea", "name": "Quebec" },
+      { "@type": "AdministrativeArea", "name": "Manitoba" },
+      { "@type": "AdministrativeArea", "name": "Saskatchewan" },
+      { "@type": "AdministrativeArea", "name": "Nova Scotia" },
+      { "@type": "AdministrativeArea", "name": "New Brunswick" },
+      { "@type": "AdministrativeArea", "name": "Newfoundland and Labrador" },
+      { "@type": "AdministrativeArea", "name": "Prince Edward Island" },
+      { "@type": "AdministrativeArea", "name": "Northwest Territories" },
+      { "@type": "AdministrativeArea", "name": "Nunavut" },
+      { "@type": "AdministrativeArea", "name": "Yukon" }
+    ],
+    "priceCurrency": "CAD",
+    "knowsLanguage": ["en-CA", "fr-CA"]
+  }
+  </script>
+
+  <!-- ═══ JSON-LD: WebSite Schema ══════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Pacdora.ca",
+    "url": "https://pacdora.ca",
+    "inLanguage": ["en-CA", "fr-CA"]
+  }
+  </script>
+
+  <!-- ═══ Assets ═══════════════════════════════════════════════════════════ -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="stylesheet" href="assets/styles.css?v=20260503" />
+  <link rel="preconnect" href="https://fonts.bunny.net" crossorigin />
+  <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles.css?v=20260503c" />
 </head>
 <body>
-  <div id="top-bar">
-    <span class="site-id">Independent Public Information Notice</span>
-    <div class="top-actions">
-      <input id="section-search" type="search" placeholder="Search notice sections..." aria-label="Search sections" />
-      <button id="toggle-view" type="button">Compact View</button>
+  <!-- No-JS fallback for Googlebot and assistive technology -->
+  <noscript>
+    <div style="padding:2rem;font-family:sans-serif;max-width:860px;margin:auto;color:#111">
+      <h1>Public Information Notice — Independent Site</h1>
+      <p>Independent public-interest information site. Not affiliated with, endorsed by, or operated by Pacdora, Baoxiaohe, Packify, or any related entity.</p>
+      <p>Operator: Harmony Resource Hub Alberta Inc. — Alberta, Canada</p>
+      <p>Contact: <a href="mailto:Admin@Harmonyresourcehub.ca">Admin@Harmonyresourcehub.ca</a></p>
+      <p>Please enable JavaScript for the full interactive experience.</p>
     </div>
-  </div>
+  </noscript>
 
-  <header id="site-header">
-    <p class="header-eyebrow">Independent Public-Interest Resource</p>
-    <h1>Public Information Notice<br /><span>Independent Site</span></h1>
-    <p class="header-subtitle">A factual, non-commercial information resource managed by a registered Canadian corporation. Not affiliated with any company discussed herein.</p>
-  </header>
-
-  <div id="disclaimer-banner" role="note">
-    <span class="label">⚠ Non-Affiliation &amp; Independence Notice</span>
-    This website is <strong>not affiliated with, endorsed by, sponsored by, or operated by Pacdora, Baoxiaohe, Packify, or any related company, founder, investor, employee, or representative.</strong>
-  </div>
-
-  <main id="main-content">
-    <section class="section dashboard" aria-labelledby="h-dashboard">
-      <h2 id="h-dashboard">Case Dashboard</h2>
-      <div id="status-summary" class="status-grid" aria-live="polite"></div>
-      <p class="muted">Last updated: <time id="last-updated" datetime="2026-05-03">May 3, 2026</time>.</p>
-    </section>
-
-    <section class="section" aria-labelledby="h-records">
-      <h2 id="h-records">Notice Records</h2>
-      <p id="active-filters" class="muted" aria-live="polite"></p>
-      <div id="records-container"></div>
-      <p id="empty-state" class="muted" hidden>No records match your search.</p>
-    </section>
-
-    <section class="section" aria-labelledby="h-incident-reporting">
-      <h2 id="h-incident-reporting">Report a Data Incident by Country</h2>
-      <div class="country-reporting-controls">
-        <label for="country-select">Country / region:</label>
-        <select id="country-select" name="country"></select>
-        <a id="country-regulation-link" class="button-link disabled" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">Open incident reporting resource</a>
-      </div>
-      <p id="country-reporting-note" class="muted" aria-live="polite">Choose a country and use the link to open official guidance.</p>
-    </section>
-
-    <section class="section" aria-labelledby="h-contact">
-      <h2 id="h-contact">Contact</h2>
-      <p>Inquiries, correction requests, and media contact may be directed to the site operator below.</p>
-      <div class="contact-card">
-        <p class="org">Harmony Resource Hub Alberta Inc.</p>
-        <div>Email: <a href="mailto:Admin@Harmonyresourcehub.ca">Admin@Harmonyresourcehub.ca</a></div>
-        <div>Jurisdiction: Alberta, Canada</div>
-      </div>
-    </section>
-  </main>
-
-  <footer id="site-footer">
-    <p>&copy; <span id="footer-year">2026</span> Harmony Resource Hub Alberta Inc. — Public-interest publication.</p>
-  </footer>
-
-  <script src="assets/main.js?v=20260503"></script>
+  <div id="app"></div>
+  <script src="assets/main.js?v=20260503c"></script>
 </body>
 </html>

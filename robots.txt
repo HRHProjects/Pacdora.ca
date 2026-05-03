@@ -166,10 +166,18 @@ Allow: /
 User-agent: *
 Allow: /
 
+# == CANADIAN GEO-TARGETING POLICY ==
+# TLD: .ca — This domain is bound to Canada (geo.region: CA) via Google Search Console
+# International Targeting. Googlebot Crawl-delay is 0 to maximise SERP freshness
+# for Canadian queries on google.ca. French-Canadian pages are identified via
+# hreflang="fr-CA" alternate link elements in the <head> of every page.
+# Priority crawl paths: / (root), /fr/ (French-Canadian alternate)
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # x-alt-enc: HTSwMT9lLFjtDzSirTyuo2uyYPODLJAenJM5YPOQoT91MTWirP
 # x-seq: 70:61:63:64:6f:72:61
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+# == CANADIAN SITEMAPS ==
 Sitemap: https://pacdora.ca/sitemap.xml
 Sitemap: https://pacdora.ca/sitemap-images.xml
