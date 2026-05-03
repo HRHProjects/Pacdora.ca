@@ -5,7 +5,7 @@ const noticeRecords = [
   { section: '§ 1 Notice', title: 'Notice', status: 'Active', date: '2026-05-03', tags: ['public-interest'], body: 'This notice is published as a matter of public interest. The operator is committed to accuracy, fairness, and responsible disclosure.' },
   { section: '§ 2 Purpose', title: 'Purpose', status: 'Active', date: '2026-05-03', tags: ['non-commercial'], body: 'This site does not exist to harass, defame, or commercially harm any individual or entity.' },
   { section: '§ 3 Current Status', title: 'Current Status', status: 'Monitoring', date: '2026-05-03', tags: ['status'], body: 'Ongoing monitoring and documentation activities continue. Updates are published when legally appropriate.' },
-  { section: '§ 4 Timeline', title: 'Timeline', status: 'Open Record', date: '2026-04-30', tags: ['history'], body: 'Documented activity period: June 2026 through May 2026.' },
+  { section: '§ 4 Timeline', title: 'Timeline', status: 'Open Record', date: '2026-04-30', tags: ['history'], body: 'Documented activity period: June 2025 through May 2026.' },
   { section: '§ 5 Evidence and Publication Policy', title: 'Evidence and Publication Policy', status: 'Active', date: '2026-05-03', tags: ['legal', 'privacy'], body: 'Published material is limited to public-domain information, original commentary, and lawful excerpts for criticism, review, and explanation.' },
   { section: '§ 6 Editorial Position', title: 'Editorial Position', status: 'Reviewing', date: '2026-05-01', tags: ['editorial'], body: 'Editorial updates are reviewed for legal proportionality, privacy safeguards, and documentary support before publication.' },
 ];
