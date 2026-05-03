@@ -1,129 +1,92 @@
 const year = document.getElementById('footer-year');
-
 if (year) year.textContent = String(new Date().getFullYear());
 
-const sections = document.querySelectorAll('.section');
-const supportsMotion = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const noticeRecords = [
+  { section: '§ 1 Notice', title: 'Notice', status: 'Active', date: '2026-05-03', tags: ['public-interest'], body: 'This notice is published as a matter of public interest. The operator is committed to accuracy, fairness, and responsible disclosure.' },
+  { section: '§ 2 Purpose', title: 'Purpose', status: 'Active', date: '2026-05-03', tags: ['non-commercial'], body: 'This site does not exist to harass, defame, or commercially harm any individual or entity.' },
+  { section: '§ 3 Current Status', title: 'Current Status', status: 'Monitoring', date: '2026-05-03', tags: ['status'], body: 'Ongoing monitoring and documentation activities continue. Updates are published when legally appropriate.' },
+  { section: '§ 4 Timeline', title: 'Timeline', status: 'Open Record', date: '2026-04-30', tags: ['history'], body: 'Documented activity period: June 2025 through April 2026, with additional review windows as needed.' },
+  { section: '§ 5 Evidence and Publication Policy', title: 'Evidence and Publication Policy', status: 'Active', date: '2026-05-03', tags: ['legal', 'privacy'], body: 'Published material is limited to public-domain information, original commentary, and lawful excerpts for criticism, review, and explanation.' },
+  { section: '§ 6 Editorial Position', title: 'Editorial Position', status: 'Reviewing', date: '2026-05-01', tags: ['editorial'], body: 'Editorial updates are reviewed for legal proportionality, privacy safeguards, and documentary support before publication.' },
+];
 
-if (sections.length && supportsMotion) {
-  document.body.classList.add('js-enhanced');
+const statusSummary = document.getElementById('status-summary');
+const recordsContainer = document.getElementById('records-container');
+const sectionFilter = document.getElementById('section-filter');
+const sectionSearch = document.getElementById('section-search');
+const emptyState = document.getElementById('empty-state');
+const toggleView = document.getElementById('toggle-view');
 
-  const sectionObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        entry.target.classList.toggle('is-visible', entry.isIntersecting);
-      });
-    },
-    {
-      root: null,
-      threshold: 0.2,
-      rootMargin: '0px 0px -8% 0px',
-    }
-  );
+function renderSummary() {
+  const grouped = noticeRecords.reduce((acc, item) => {
+    acc[item.status] = (acc[item.status] || 0) + 1;
+    return acc;
+  }, {});
 
-  sections.forEach((section) => sectionObserver.observe(section));
-} else {
-  sections.forEach((section) => section.classList.add('is-visible'));
+  statusSummary.innerHTML = Object.entries(grouped)
+    .map(([status, count]) => `<article class="status-item"><strong>${status}</strong><div>${count} record(s)</div></article>`)
+    .join('');
 }
 
-const independenceNotice = document.getElementById('independence-notice');
-const acknowledgeBtn = document.getElementById('acknowledge-notice');
-
-if (independenceNotice) {
-  independenceNotice.hidden = false;
-  document.body.classList.add('notice-open');
+function renderFilterOptions() {
+  const uniqueSections = ['All Sections', ...new Set(noticeRecords.map((entry) => entry.section))];
+  sectionFilter.innerHTML = uniqueSections.map((name) => `<option value="${name}">${name}</option>`).join('');
 }
 
-if (acknowledgeBtn && independenceNotice) {
-  acknowledgeBtn.addEventListener('click', () => {
-    independenceNotice.hidden = true;
-    document.body.classList.remove('notice-open');
+function renderRecords() {
+  const filterValue = sectionFilter.value;
+  const searchValue = sectionSearch.value.trim().toLowerCase();
+
+  const visible = noticeRecords.filter((entry) => {
+    const matchesSection = filterValue === 'All Sections' || entry.section === filterValue;
+    const searchable = `${entry.section} ${entry.title} ${entry.body} ${entry.tags.join(' ')}`.toLowerCase();
+    return matchesSection && searchable.includes(searchValue);
   });
 
-  acknowledgeBtn.focus();
+  recordsContainer.innerHTML = visible
+    .map((entry) => `
+      <article class="record-item">
+        <h3>${entry.title}</h3>
+        <div class="record-meta">${entry.section} • ${entry.date} • ${entry.status}</div>
+        <p>${entry.body}</p>
+        <div>${entry.tags.map((tag) => `<span class="tag">${tag}</span>`).join('')}</div>
+      </article>`)
+    .join('');
+
+  emptyState.hidden = visible.length !== 0;
 }
 
-function initGoogleTranslate() {
-  if (!window.google?.translate?.TranslateElement) return;
+sectionFilter.addEventListener('change', renderRecords);
+sectionSearch.addEventListener('input', renderRecords);
 
-  new window.google.translate.TranslateElement(
-    {
-      pageLanguage: 'en',
-      autoDisplay: false,
-    },
-    'google_translate_element'
-  );
-}
+toggleView.addEventListener('click', () => {
+  document.body.classList.toggle('compact');
+  toggleView.textContent = document.body.classList.contains('compact') ? 'Expanded View' : 'Compact View';
+});
 
-window.initGoogleTranslate = initGoogleTranslate;
+renderSummary();
+renderFilterOptions();
+renderRecords();
 
 const countrySelect = document.getElementById('country-select');
 const countryRegulationLink = document.getElementById('country-regulation-link');
 const countryReportingNote = document.getElementById('country-reporting-note');
 
 const incidentReportingByCountry = {
-  eu: {
-    label: 'European Union (GDPR)',
-    url: 'https://www.edpb.europa.eu/about-edpb/about-edpb/members_en',
-  },
-  ca: {
-    label: 'Canada',
-    url: 'https://www.priv.gc.ca/en/report-a-concern/report-a-privacy-breach-at-your-organization/report-a-privacy-breach-at-your-business/',
-  },
-  uk: {
-    label: 'United Kingdom',
-    url: 'https://ico.org.uk/for-organisations/report-a-breach/personal-data-breach/',
-  },
-  us: {
-    label: 'United States',
-    url: 'https://www.ncsl.org/technology-and-communication/security-breach-notification-laws',
-  },
-  au: {
-    label: 'Australia',
-    url: 'https://www.oaic.gov.au/privacy/notifiable-data-breaches/report-a-data-breach/',
-  },
-  nz: {
-    label: 'New Zealand',
-    url: 'https://www.privacy.org.nz/privacy-act-2020/privacy-breaches/notify-us-about-a-privacy-breach/',
-  },
-  jp: {
-    label: 'Japan',
-    url: 'https://www.ppc.go.jp/en/personalinfo/legal/leakAction/',
-  },
-  ie: {
-    label: 'Ireland',
-    url: 'https://forms.dataprotection.ie/contact',
-  },
-  in: {
-    label: 'India',
-    url: 'https://www.cert-in.org.in/s2cMainServlet?pageid=INFOSEC03',
-  },
-  cn: {
-    label: 'China',
-    url: 'https://www.cac.gov.cn/2021-08/20/c_1632441998053314.htm',
-  },
-  sg: {
-    label: 'Singapore',
-    url: 'https://www.pdpc.gov.sg/Compliance/Guides/Guide-to-Managing-Data-Breaches-2-0',
-  },
+  eu: { label: 'European Union (GDPR)', url: 'https://www.edpb.europa.eu/about-edpb/about-edpb/members_en' },
+  ca: { label: 'Canada', url: 'https://www.priv.gc.ca/en/report-a-concern/report-a-privacy-breach-at-your-organization/report-a-privacy-breach-at-your-business/' },
+  uk: { label: 'United Kingdom', url: 'https://ico.org.uk/for-organisations/report-a-breach/personal-data-breach/' },
+  us: { label: 'United States', url: 'https://www.ncsl.org/technology-and-communication/security-breach-notification-laws' },
 };
 
-if (countryRegulationLink && countrySelect) {
-  countryRegulationLink.addEventListener('click', () => {
-    const selectedCountry = incidentReportingByCountry[countrySelect.value];
+countrySelect.innerHTML = `<option value="">Select a country</option>${Object.entries(incidentReportingByCountry).map(([k,v])=>`<option value="${k}">${v.label}</option>`).join('')}`;
 
-    if (!selectedCountry) {
-      if (countryReportingNote) {
-        countryReportingNote.textContent = 'Please choose a country first.';
-      }
-      countrySelect.focus();
-      return;
-    }
-
-    if (countryReportingNote) {
-      countryReportingNote.textContent = `Opening the ${selectedCountry.label} incident reporting guidance in a new tab.`;
-    }
-
-    window.open(selectedCountry.url, '_blank', 'noopener,noreferrer');
-  });
-}
+countryRegulationLink.addEventListener('click', () => {
+  const selectedCountry = incidentReportingByCountry[countrySelect.value];
+  if (!selectedCountry) {
+    countryReportingNote.textContent = 'Please choose a country first.';
+    return;
+  }
+  countryReportingNote.textContent = `Opening the ${selectedCountry.label} incident reporting guidance in a new tab.`;
+  window.open(selectedCountry.url, '_blank', 'noopener,noreferrer');
+});

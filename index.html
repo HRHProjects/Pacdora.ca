@@ -5,211 +5,75 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="index, follow" />
   <meta name="description" content="Independent public-interest information site. Not affiliated with, endorsed by, or operated by Pacdora, Baoxiaohe, Packify, or any related entity." />
-
-  <meta property="og:title" content="Public Information Notice — Independent Site" />
-  <meta property="og:description" content="Independent public-interest information site. Not affiliated with any company discussed herein." />
-  <meta property="og:type" content="website" />
-
   <title>Public Information Notice — Independent Site</title>
-
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.svg" />
   <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
   <div id="top-bar">
     <span class="site-id">Independent Public Information Notice</span>
-    <div id="lang-switcher" aria-label="Language selector">
-      <div id="google_translate_element" aria-label="Translate this site"></div>
+    <div class="top-actions">
+      <input id="section-search" type="search" placeholder="Search notice sections..." aria-label="Search sections" />
+      <button id="toggle-view" type="button">Compact View</button>
     </div>
   </div>
 
   <header id="site-header">
     <p class="header-eyebrow">Independent Public-Interest Resource</p>
     <h1>Public Information Notice<br /><span>Independent Site</span></h1>
-    <p class="header-subtitle">
-      A factual, non-commercial information resource managed by a registered
-      Canadian corporation. Not affiliated with any company discussed herein.
-    </p>
+    <p class="header-subtitle">A factual, non-commercial information resource managed by a registered Canadian corporation. Not affiliated with any company discussed herein.</p>
   </header>
 
-  <div id="disclaimer-banner" role="note" aria-label="Non-affiliation notice">
+  <div id="disclaimer-banner" role="note">
     <span class="label">⚠ Non-Affiliation &amp; Independence Notice</span>
-    This website is <strong>not affiliated with, endorsed by, sponsored by,
-    or operated by Pacdora, Baoxiaohe, Packify, or any related company,
-    founder, investor, employee, or representative.</strong> All opinions and
-    statements expressed here are those of the site operator alone and are
-    published in the exercise of lawful freedom of expression.
-  </div>
-
-  <div id="not-portal" role="note">
-    <span class="icon" aria-hidden="true">ℹ</span>
-    <span>
-      <strong>This is not a login portal, product page, customer-support
-      channel, or official company website.</strong> If you are looking for
-      official support or account access for Pacdora, Baoxiaohe, or Packify,
-      please visit those companies' own official domains directly.
-    </span>
+    This website is <strong>not affiliated with, endorsed by, sponsored by, or operated by Pacdora, Baoxiaohe, Packify, or any related company, founder, investor, employee, or representative.</strong>
   </div>
 
   <main id="main-content">
-    <section id="notice" class="section" aria-labelledby="h-notice">
-      <p class="section-label">§ 1</p>
-      <h2 id="h-notice">Notice</h2>
-      <p>
-        This notice is published as a matter of public interest. The operator of this site is committed to accuracy, fairness, and responsible disclosure.
-      </p>
+    <section class="section dashboard" aria-labelledby="h-dashboard">
+      <h2 id="h-dashboard">Case Dashboard</h2>
+      <div id="status-summary" class="status-grid" aria-live="polite"></div>
+      <p class="muted">Last updated: <time id="last-updated" datetime="2026-05-03">May 3, 2026</time>.</p>
     </section>
 
-    <section id="purpose" class="section" aria-labelledby="h-purpose">
-      <p class="section-label">§ 2</p>
-      <h2 id="h-purpose">Purpose</h2>
-      <p>
-        This site does not exist to harass, defame, or commercially harm any individual or entity. Its sole purpose is to make truthful, documented information accessible to the public and to relevant authorities.
-      </p>
-    </section>
-
-    <section id="status" class="section" aria-labelledby="h-status">
-      <p class="section-label">§ 3</p>
-      <h2 id="h-status">Current Status</h2>
-      <p>Check Back Soon</p>
-    </section>
-
-    <section id="timeline" class="section" aria-labelledby="h-timeline">
-      <p class="section-label">§ 4</p>
-      <h2 id="h-timeline">Timeline</h2>
-
-      <div class="timeline" role="list">
-        <div class="timeline-item" role="listitem">
-          <p class="timeline-date">June 2025 to April 2026</p>
-        </div>
+    <section class="section" aria-labelledby="h-filter">
+      <h2 id="h-filter">Dynamic Record Navigator</h2>
+      <div class="controls">
+        <label for="section-filter">Filter by section:</label>
+        <select id="section-filter"></select>
       </div>
     </section>
 
-    <section id="evidence" class="section" aria-labelledby="h-evidence">
-      <p class="section-label">§ 5</p>
-      <h2 id="h-evidence">Evidence and Publication Policy</h2>
-      <p>
-        Statements on this site are supported by documented materials such as dated correspondence,
-        domain and company registration records, service-policy records, and publicly available filings.
-        Before publication, materials are screened for privacy, legal privilege, and proportionality.
-      </p>
-
-      <p>This site will <strong>not</strong> publish:</p>
-      <ul class="policy-list" aria-label="Items this site will not publish">
-        <li><span class="icon" aria-hidden="true">✕</span><span>Source code, compiled binaries, or proprietary software of any party</span></li>
-        <li><span class="icon" aria-hidden="true">✕</span><span>API keys, authentication tokens, credentials, passwords, secrets, or access certificates</span></li>
-        <li><span class="icon" aria-hidden="true">✕</span><span>Customer files, user-uploaded materials, or data originating from third-party end-users</span></li>
-        <li><span class="icon" aria-hidden="true">✕</span><span>Private personal information about individuals not central to documented public-interest conduct</span></li>
-        <li><span class="icon" aria-hidden="true">✕</span><span>Unredacted technical material whose disclosure could cause disproportionate or unrelated harm</span></li>
-      </ul>
-
-      <p>
-        Published material is limited to public-domain information, original commentary, and lawful use
-        of excerpts for criticism, review, and public-interest explanation.
-      </p>
+    <section class="section" aria-labelledby="h-records">
+      <h2 id="h-records">Notice Records</h2>
+      <div id="records-container"></div>
+      <p id="empty-state" class="muted" hidden>No records match your current filter.</p>
     </section>
 
-    <section id="editorial" class="section" aria-labelledby="h-editorial">
-      <p class="section-label">§ 6</p>
-      <h2 id="h-editorial">Editorial Position</h2>
-      <p>Check Back soon</p>
-    </section>
-
-    <section id="incident-reporting" class="section" aria-labelledby="h-incident-reporting">
-      <p class="section-label">§ 7</p>
+    <section class="section" aria-labelledby="h-incident-reporting">
       <h2 id="h-incident-reporting">Report a Data Incident by Country</h2>
-      <p>
-        Select your country to open the official regulator page that explains how to report a data-protection or privacy incident.
-      </p>
-
-      <div class="country-reporting" role="group" aria-label="Country data incident reporting directory">
-        <label for="country-select">Choose your country</label>
-        <div class="country-reporting-controls">
-          <select id="country-select" name="country">
-            <option value="">Select a country</option>
-            <option value="eu">European Union (GDPR)</option>
-            <option value="ca">Canada</option>
-            <option value="uk">United Kingdom</option>
-            <option value="us">United States</option>
-            <option value="au">Australia</option>
-            <option value="nz">New Zealand</option>
-            <option value="jp">Japan</option>
-            <option value="ie">Ireland</option>
-            <option value="in">India</option>
-            <option value="cn">China</option>
-            <option value="sg">Singapore</option>
-          </select>
-          <button id="country-regulation-link" type="button">Open incident reporting resource</button>
-        </div>
-        <p id="country-reporting-note" class="country-reporting-note" aria-live="polite">
-          Tip: this opens in a new tab so you can keep this page open.
-        </p>
+      <div class="country-reporting-controls">
+        <select id="country-select" name="country"></select>
+        <button id="country-regulation-link" type="button">Open incident reporting resource</button>
       </div>
+      <p id="country-reporting-note" class="muted" aria-live="polite">Tip: this opens in a new tab so you can keep this page open.</p>
     </section>
 
-    <section id="contact" class="section" aria-labelledby="h-contact">
-      <p class="section-label">§ 8</p>
+    <section class="section" aria-labelledby="h-contact">
       <h2 id="h-contact">Contact</h2>
-      <p>
-        Inquiries, correction requests, and media contact may be directed to the site operator below.
-        Legal correspondence must be sent in writing to the registered address of Harmony Resource Hub
-        Alberta Inc.
-      </p>
-
-      <a class="right-of-reply-btn" href="mailto:admin@harmonyresourcehub.ca?subject=Right%20of%20Reply" aria-label="Open your email app to send a right of reply message">
-        Right of Reply
-      </a>
-
+      <p>Inquiries, correction requests, and media contact may be directed to the site operator below.</p>
       <div class="contact-card">
         <p class="org">Harmony Resource Hub Alberta Inc.</p>
-        <div class="meta">
-          <div>Email: <a href="mailto:Admin@Harmonyresourcehub.ca">Admin@Harmonyresourcehub.ca</a></div>
-          <div>Legal Counsel: Available upon formal written request</div>
-          <div>Site Established: <time datetime="2026-04-04">April 4, 2026</time></div>
-          <div>Jurisdiction: Alberta, Canada</div>
-        </div>
+        <div>Email: <a href="mailto:Admin@Harmonyresourcehub.ca">Admin@Harmonyresourcehub.ca</a></div>
+        <div>Jurisdiction: Alberta, Canada</div>
       </div>
-
-      <p style="margin-top:1.25rem; font-size:0.85rem; color:var(--muted);">
-        <em>Response times may vary. This contact channel is for good-faith correspondence. Harassment,
-        abusive communication, and malicious impersonation reports may be documented and escalated to the
-        appropriate authorities.</em>
-      </p>
     </section>
   </main>
 
-  <div id="independence-notice" class="notice-overlay" role="dialog" aria-modal="true" aria-labelledby="independence-notice-title">
-    <div class="notice-card">
-      <p id="independence-notice-title"><strong>⚠ Non-Affiliation &amp; Independence Notice</strong></p>
-      <p>
-        This website is not affiliated with, endorsed by, sponsored by, or operated by Pacdora, Baoxiaohe, Packify, or any related company, founder, investor, employee, or representative. All opinions and statements expressed here are those of the site operator alone and are published in the exercise of lawful freedom of expression.
-      </p>
-      <button id="acknowledge-notice" type="button">I Understand</button>
-    </div>
-  </div>
-
   <footer id="site-footer">
-    <div class="rule" aria-hidden="true"></div>
-    <p>
-      This website is not affiliated with, endorsed by, sponsored by,<br />
-      or operated by Pacdora, Baoxiaohe, Packify, or any related entity.
-    </p>
-    <p style="margin-top:0.5rem;">
-      Managed by Harmony Resource Hub Alberta Inc. &mdash;
-      Admin@Harmonyresourcehub.ca &mdash; Est. April 4, 2026
-    </p>
-    <p style="margin-top:0.5rem; color:#4a5a70;">
-      &copy; <span id="footer-year">2026</span> Harmony Resource Hub Alberta Inc.
-      All rights reserved. Content published for public-interest purposes.
-    </p>
-    <p style="margin-top:0.5rem; color:#4a5a70;">
-      This website uses privacy-focused analytics to understand general traffic patterns. We do not sell visitor data or use advertising trackers.
-    </p>
+    <p>&copy; <span id="footer-year">2026</span> Harmony Resource Hub Alberta Inc. — Public-interest publication.</p>
   </footer>
 
   <script src="assets/main.js"></script>
-  <script src="//translate.google.com/translate_a/element.js?cb=initGoogleTranslate"></script>
-  <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "81cd29a3e18347b887d73dbb7cfd315b"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
