@@ -36,29 +36,21 @@
       <p class="muted">Last updated: <time id="last-updated" datetime="2026-05-03">May 3, 2026</time>.</p>
     </section>
 
-    <section class="section" aria-labelledby="h-filter">
-      <h2 id="h-filter">Dynamic Record Navigator</h2>
-      <div class="controls">
-        <label for="section-filter">Filter by section:</label>
-        <select id="section-filter"></select>
-        <button id="clear-filters" type="button">Clear filters</button>
-      </div>
-      <p id="active-filters" class="muted" aria-live="polite"></p>
-    </section>
-
     <section class="section" aria-labelledby="h-records">
       <h2 id="h-records">Notice Records</h2>
+      <p id="active-filters" class="muted" aria-live="polite"></p>
       <div id="records-container"></div>
-      <p id="empty-state" class="muted" hidden>No records match your current filter.</p>
+      <p id="empty-state" class="muted" hidden>No records match your search.</p>
     </section>
 
     <section class="section" aria-labelledby="h-incident-reporting">
       <h2 id="h-incident-reporting">Report a Data Incident by Country</h2>
       <div class="country-reporting-controls">
+        <label for="country-select">Country / region:</label>
         <select id="country-select" name="country"></select>
-        <button id="country-regulation-link" type="button">Open incident reporting resource</button>
+        <a id="country-regulation-link" class="button-link disabled" href="#" target="_blank" rel="noopener noreferrer" aria-disabled="true">Open incident reporting resource</a>
       </div>
-      <p id="country-reporting-note" class="muted" aria-live="polite">Tip: this opens in a new tab so you can keep this page open.</p>
+      <p id="country-reporting-note" class="muted" aria-live="polite">Choose a country and use the link to open official guidance.</p>
     </section>
 
     <section class="section" aria-labelledby="h-contact">

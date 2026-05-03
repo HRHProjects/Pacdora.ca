@@ -5,19 +5,17 @@ const noticeRecords = [
   { section: '§ 1 Notice', title: 'Notice', status: 'Active', date: '2026-05-03', tags: ['public-interest'], body: 'This notice is published as a matter of public interest. The operator is committed to accuracy, fairness, and responsible disclosure.' },
   { section: '§ 2 Purpose', title: 'Purpose', status: 'Active', date: '2026-05-03', tags: ['non-commercial'], body: 'This site does not exist to harass, defame, or commercially harm any individual or entity.' },
   { section: '§ 3 Current Status', title: 'Current Status', status: 'Monitoring', date: '2026-05-03', tags: ['status'], body: 'Ongoing monitoring and documentation activities continue. Updates are published when legally appropriate.' },
-  { section: '§ 4 Timeline', title: 'Timeline', status: 'Open Record', date: '2026-04-30', tags: ['history'], body: 'Documented activity period: June 2025 through April 2026, with additional review windows as needed.' },
+  { section: '§ 4 Timeline', title: 'Timeline', status: 'Open Record', date: '2026-04-30', tags: ['history'], body: 'Documented activity period: June 2026 through May 2026.' },
   { section: '§ 5 Evidence and Publication Policy', title: 'Evidence and Publication Policy', status: 'Active', date: '2026-05-03', tags: ['legal', 'privacy'], body: 'Published material is limited to public-domain information, original commentary, and lawful excerpts for criticism, review, and explanation.' },
   { section: '§ 6 Editorial Position', title: 'Editorial Position', status: 'Reviewing', date: '2026-05-01', tags: ['editorial'], body: 'Editorial updates are reviewed for legal proportionality, privacy safeguards, and documentary support before publication.' },
 ];
 
 const statusSummary = document.getElementById('status-summary');
 const recordsContainer = document.getElementById('records-container');
-const sectionFilter = document.getElementById('section-filter');
 const sectionSearch = document.getElementById('section-search');
 const emptyState = document.getElementById('empty-state');
 const toggleView = document.getElementById('toggle-view');
 const activeFilters = document.getElementById('active-filters');
-const clearFilters = document.getElementById('clear-filters');
 
 function renderSummary() {
   const grouped = noticeRecords.reduce((acc, item) => {
@@ -28,11 +26,6 @@ function renderSummary() {
   statusSummary.innerHTML = Object.entries(grouped)
     .map(([status, count]) => `<article class="status-item"><strong>${status}</strong><div>${count} record(s)</div></article>`)
     .join('');
-}
-
-function renderFilterOptions() {
-  const uniqueSections = ['All Sections', ...new Set(noticeRecords.map((entry) => entry.section))];
-  sectionFilter.innerHTML = uniqueSections.map((name) => `<option value="${name}">${name}</option>`).join('');
 }
 
 function escapeRegExp(value) {
@@ -46,13 +39,11 @@ function highlightMatch(text, searchValue) {
 }
 
 function renderRecords() {
-  const filterValue = sectionFilter.value;
   const searchValue = sectionSearch.value.trim().toLowerCase();
 
   const visible = noticeRecords.filter((entry) => {
-    const matchesSection = filterValue === 'All Sections' || entry.section === filterValue;
     const searchable = `${entry.section} ${entry.title} ${entry.body} ${entry.tags.join(' ')}`.toLowerCase();
-    return matchesSection && searchable.includes(searchValue);
+    return searchable.includes(searchValue);
   });
 
   recordsContainer.innerHTML = visible
@@ -69,19 +60,10 @@ function renderRecords() {
   emptyState.hidden = hasResults;
   activeFilters.textContent = hasResults
     ? `Showing ${visible.length} of ${noticeRecords.length} record(s).`
-    : `No results for section "${filterValue}"${searchValue ? ` and search "${sectionSearch.value.trim()}"` : ''}.`;
+    : `No results for search "${sectionSearch.value.trim()}".`;
 }
 
-function resetFilters() {
-  sectionFilter.value = 'All Sections';
-  sectionSearch.value = '';
-  renderRecords();
-}
-
-sectionFilter.addEventListener('change', renderRecords);
 sectionSearch.addEventListener('input', renderRecords);
-clearFilters.addEventListener('click', resetFilters);
-
 sectionSearch.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
     sectionSearch.value = '';
@@ -95,7 +77,6 @@ toggleView.addEventListener('click', () => {
 });
 
 renderSummary();
-renderFilterOptions();
 renderRecords();
 
 const countrySelect = document.getElementById('country-select');
@@ -111,14 +92,26 @@ const incidentReportingByCountry = {
 
 countrySelect.innerHTML = `<option value="">Select a country</option>${Object.entries(incidentReportingByCountry).map(([k, v]) => `<option value="${k}">${v.label}</option>`).join('')}`;
 
-countryRegulationLink.addEventListener('click', () => {
+countrySelect.addEventListener('change', () => {
   const selectedCountry = incidentReportingByCountry[countrySelect.value];
+
   if (!selectedCountry) {
-    countryReportingNote.textContent = 'Please choose a country first.';
-    countryReportingNote.classList.add('warning');
+    countryRegulationLink.href = '#';
+    countryRegulationLink.classList.add('disabled');
+    countryRegulationLink.setAttribute('aria-disabled', 'true');
+    countryReportingNote.textContent = 'Choose a country and use the link to open official guidance.';
     return;
   }
-  countryReportingNote.classList.remove('warning');
-  countryReportingNote.textContent = `Opening the ${selectedCountry.label} incident reporting guidance in a new tab.`;
-  window.open(selectedCountry.url, '_blank', 'noopener,noreferrer');
+
+  countryRegulationLink.href = selectedCountry.url;
+  countryRegulationLink.classList.remove('disabled');
+  countryRegulationLink.setAttribute('aria-disabled', 'false');
+  countryReportingNote.textContent = `${selectedCountry.label} guidance is ready to open in a new tab.`;
+});
+
+countryRegulationLink.addEventListener('click', (event) => {
+  if (countryRegulationLink.classList.contains('disabled')) {
+    event.preventDefault();
+    countryReportingNote.textContent = 'Please choose a country first.';
+  }
 });
