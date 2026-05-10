@@ -147,7 +147,43 @@ const incidentReportingByCountry = {
   uk: { label: 'United Kingdom — ICO report a breach', url: 'https://ico.org.uk/for-organisations/report-a-breach/personal-data-breach/' },
 };
 
-const state = { search: '', activeTab: 'individuals' };
+
+const openPhotoSources = [
+  {
+    title: 'Palletised boxes ready for delivery',
+    context: 'Packaging and logistics photo for the public-information theme.',
+    src: 'https://commons.wikimedia.org/wiki/Special:FilePath/American_boxes_palletised.jpg?width=900',
+    page: 'https://commons.wikimedia.org/wiki/File:American_boxes_palletised.jpg',
+    credit: 'SimónK / Wikimedia Commons',
+    license: 'CC BY-SA 4.0',
+  },
+  {
+    title: 'Server racks at NERSC',
+    context: 'Real infrastructure photo showing where digital services may depend on safeguards.',
+    src: 'https://commons.wikimedia.org/wiki/Special:FilePath/Front_of_server_racks_at_NERSC.jpg?width=900',
+    page: 'https://commons.wikimedia.org/wiki/File:Front_of_server_racks_at_NERSC.jpg',
+    credit: 'Derrick Coetzee / Wikimedia Commons',
+    license: 'CC0 1.0',
+  },
+  {
+    title: 'Operations center workstations',
+    context: 'Public-domain photo of people monitoring networked systems.',
+    src: 'https://commons.wikimedia.org/wiki/Special:FilePath/210303-F-ZY709-1002_616th_Operations_Center.jpg?width=900',
+    page: 'https://commons.wikimedia.org/wiki/File:210303-F-ZY709-1002_616th_Operations_Center.jpg',
+    credit: 'U.S. Air Force photo by Vincent Childress',
+    license: 'Public domain',
+  },
+  {
+    title: 'Laptop planning during cyber exercise',
+    context: 'Public-domain photo representing shared responsibility and coordination.',
+    src: 'https://commons.wikimedia.org/wiki/Special:FilePath/Neurons_connect_at_US_Army%27s_CyberCenter_of_Excellence_140610-Z-PA893-053.jpg?width=900',
+    page: 'https://commons.wikimedia.org/wiki/File:Neurons_connect_at_US_Army%27s_CyberCenter_of_Excellence_140610-Z-PA893-053.jpg',
+    credit: 'Staff Sgt. Tracy Smith / Georgia National Guard',
+    license: 'Public domain',
+  },
+];
+
+const state = { search: '', activeTab: 'individuals', activePhoto: 0, checkedItems: new Set() };
 
 function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -171,10 +207,11 @@ function iconSvg(name) {
 function buildTopBar() {
   return `
   <nav id="top-bar" aria-label="Main navigation">
-    <a class="site-id" href="#app">Pacdora.ca Security Resource</a>
+    <a class="site-id" href="#app">Pacdora.ca Public Notice</a>
     <div class="top-actions">
       <a href="#articles">Open Articles</a>
       <a href="#vendor-checklist">Vendor Checklist</a>
+      <a href="#open-photos">Open Photos</a>
       <a href="#reporting">Report</a>
       <div class="search-wrapper">
         <span class="search-icon" aria-hidden="true">⌕</span>
@@ -188,17 +225,27 @@ function buildHeader() {
   return `
   <header id="site-header">
     <div class="hero-copy animate-in">
-      <p class="header-eyebrow">Open-source cybersecurity, privacy, and vendor-risk education</p>
-      <h1>Data security is a human safety issue — and a B2B trust obligation.</h1>
-      <p class="header-subtitle">This public resource gathers open government, standards, and community guidance to explain why business-to-business vendors must be especially careful with personal data, customer systems, and partner integrations.</p>
+      <p class="header-eyebrow">Pacdora.ca public information notice — independent site</p>
+      <h1>Plain Pacdora public notice with data security context.</h1>
+      <p class="header-subtitle">This independent site is not affiliated with Pacdora, Baoxiaohe, or Packify. It is not a security resource or official support channel; it is a public-information notice that includes plain-language information about data security, privacy, vendor care, and reporting links.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#impact-tabs">Explore the impact</a>
-        <a class="btn btn-secondary" href="#articles">Read open sources</a>
+        <a class="btn btn-primary" href="#independent-notice">Read the notice</a>
+        <a class="btn btn-secondary" href="#open-photos">View open photos</a>
       </div>
     </div>
-    <div class="hero-visual animate-in" style="--delay:90ms">
-      <img src="assets/hero-security.svg" alt="Illustration of a security shield protecting connected people, vendors, clients, and partners" />
-      <p>Original open vector artwork created for this public-interest site.</p>
+    <div class="hero-visual animate-in" style="--delay:90ms" aria-label="Moving open-source photo carousel">
+      <div class="hero-photo-stage">
+        ${openPhotoSources.map((photo, i) => `<figure class="hero-photo ${i === 0 ? 'is-active' : ''}" data-hero-photo="${i}">
+          <img src="${photo.src}" alt="${photo.title}" loading="${i === 0 ? 'eager' : 'lazy'}" />
+          <figcaption><strong>${photo.title}</strong><span>${photo.license} · ${photo.credit}</span></figcaption>
+        </figure>`).join('')}
+      </div>
+      <div class="hero-photo-controls" aria-label="Hero photo controls">
+        <button type="button" data-photo-direction="-1" aria-label="Show previous photo">‹</button>
+        <div class="hero-dots">${openPhotoSources.map((_, i) => `<button type="button" class="${i === 0 ? 'is-active' : ''}" data-photo-dot="${i}" aria-label="Show photo ${i + 1}"></button>`).join('')}</div>
+        <button type="button" data-photo-direction="1" aria-label="Show next photo">›</button>
+      </div>
+      <p class="hero-photo-note">Real freely licensed or public-domain photos from Wikimedia Commons; credits and links appear below.</p>
     </div>
   </header>`;
 }
@@ -215,6 +262,15 @@ function buildStats() {
 function buildMain() {
   return `
   <main id="main-content" role="main">
+    <section id="independent-notice" class="section notice-panel animate-in" aria-labelledby="notice-heading" style="--delay:110ms">
+      <div class="section-heading compact-heading"><span class="section-num">!</span><div><h2 id="notice-heading">Independent public information notice</h2><p class="muted">Pacdora.ca is a plain public-information notice site.</p></div></div>
+      <div class="notice-grid">
+        <article><strong>No affiliation</strong><span>This website is not affiliated with, endorsed by, sponsored by, or operated by Pacdora, Baoxiaohe, or Packify.</span></article>
+        <article><strong>Not a security resource</strong><span>The site includes information about data security, but it is not a security resource, audit service, legal advice, or official incident-response channel.</span></article>
+        <article><strong>Public notice only</strong><span>Use official company, regulator, law-enforcement, or professional channels for support, legal duties, security incidents, or breach reporting.</span></article>
+      </div>
+    </section>
+
     ${buildStats()}
 
     <section id="impact-tabs" class="section feature-section animate-in" aria-labelledby="impact-heading" style="--delay:170ms">
@@ -242,7 +298,9 @@ function buildMain() {
       </div>
       <div class="checklist-card">
         <h3>Vendor due-diligence questions</h3>
-        <ul>${vendorChecklist.map(item => `<li>${item}</li>`).join('')}</ul>
+        <div class="checklist-progress" aria-live="polite"><span id="checklist-progress-bar"></span></div>
+        <p id="checklist-progress-text" class="muted small">0 of 8 items marked for review.</p>
+        <ul>${vendorChecklist.map((item, i) => `<li><label><input type="checkbox" data-checklist-item="${i}" /> <span>${item}</span></label></li>`).join('')}</ul>
       </div>
     </section>
 
@@ -255,8 +313,12 @@ function buildMain() {
       <p id="empty-state" class="muted" hidden>No open-source references match your search.</p>
     </section>
 
-    <section class="section gallery-section animate-in" aria-labelledby="graphics-heading" style="--delay:330ms">
-      <div class="section-heading"><span class="section-num">05</span><div><h2 id="graphics-heading">Open graphics for awareness</h2><p class="muted">Lightweight SVG graphics embedded in the page to make the resource more visual without tracking pixels or external image dependencies.</p></div></div>
+    <section id="open-photos" class="section gallery-section animate-in" aria-labelledby="graphics-heading" style="--delay:330ms">
+      <div class="section-heading"><span class="section-num">05</span><div><h2 id="graphics-heading">Real open-source photos and visual context</h2><p class="muted">Actual freely licensed or public-domain photos are paired with lightweight graphics. Select a photo to update the featured image.</p></div></div>
+      <div class="photo-gallery">
+        <figure id="featured-photo" class="featured-photo"></figure>
+        <div class="photo-thumbs" role="list">${openPhotoSources.map((photo, i) => `<button type="button" role="listitem" data-gallery-photo="${i}" class="${i === 0 ? 'is-active' : ''}"><img src="${photo.src}" alt="" loading="lazy" /><span>${photo.title}</span></button>`).join('')}</div>
+      </div>
       <div class="graphic-grid">
         ${impactTabs.map(tab => `<figure>${iconSvg(tab.image)}<figcaption>${tab.label}: ${tab.kicker}</figcaption></figure>`).join('')}
       </div>
@@ -276,9 +338,51 @@ function buildMain() {
 function buildFooter() {
   return `
   <footer id="site-footer">
-    <p>&copy; ${new Date().getFullYear()} Harmony Resource Hub Alberta Inc. — Public-interest data security publication.</p>
+    <p>&copy; ${new Date().getFullYear()} Harmony Resource Hub Alberta Inc. — Independent Pacdora public-information notice. Not affiliated with Pacdora, Baoxiaohe, or Packify.</p>
     <p>Contact: <a href="mailto:Admin@Harmonyresourcehub.ca">Admin@Harmonyresourcehub.ca</a></p>
   </footer>`;
+}
+
+function renderHeroPhotos() {
+  document.querySelectorAll('[data-hero-photo]').forEach((photo, i) => {
+    photo.classList.toggle('is-active', i === state.activePhoto);
+  });
+  document.querySelectorAll('[data-photo-dot]').forEach((dot, i) => {
+    dot.classList.toggle('is-active', i === state.activePhoto);
+    dot.setAttribute('aria-current', i === state.activePhoto ? 'true' : 'false');
+  });
+}
+
+function setActivePhoto(index) {
+  state.activePhoto = (index + openPhotoSources.length) % openPhotoSources.length;
+  renderHeroPhotos();
+  renderFeaturedPhoto();
+}
+
+function renderFeaturedPhoto() {
+  const photo = openPhotoSources[state.activePhoto];
+  const featured = document.getElementById('featured-photo');
+  if (!featured) return;
+  featured.innerHTML = `
+    <img src="${photo.src}" alt="${photo.title}" loading="lazy" />
+    <figcaption>
+      <strong>${photo.title}</strong>
+      <span>${photo.context}</span>
+      <a href="${photo.page}" target="_blank" rel="noopener noreferrer">${photo.credit} · ${photo.license} ↗</a>
+    </figcaption>`;
+  document.querySelectorAll('[data-gallery-photo]').forEach((button, i) => {
+    button.classList.toggle('is-active', i === state.activePhoto);
+  });
+}
+
+function renderChecklistProgress() {
+  const total = vendorChecklist.length;
+  const done = state.checkedItems.size;
+  const bar = document.getElementById('checklist-progress-bar');
+  const text = document.getElementById('checklist-progress-text');
+  if (!bar || !text) return;
+  bar.style.width = `${Math.round((done / total) * 100)}%`;
+  text.textContent = `${done} of ${total} items marked for review.`;
 }
 
 function renderTabs() {
@@ -348,6 +452,30 @@ function bindEvents() {
     renderTabs();
   });
 
+  document.querySelector('.hero-photo-controls').addEventListener('click', (event) => {
+    const direction = event.target.closest('[data-photo-direction]');
+    const dot = event.target.closest('[data-photo-dot]');
+    if (direction) setActivePhoto(state.activePhoto + Number(direction.dataset.photoDirection));
+    if (dot) setActivePhoto(Number(dot.dataset.photoDot));
+  });
+
+  document.querySelector('.photo-thumbs').addEventListener('click', (event) => {
+    const button = event.target.closest('[data-gallery-photo]');
+    if (!button) return;
+    setActivePhoto(Number(button.dataset.galleryPhoto));
+  });
+
+  document.querySelector('.checklist-card').addEventListener('change', (event) => {
+    const input = event.target.closest('[data-checklist-item]');
+    if (!input) return;
+    const index = Number(input.dataset.checklistItem);
+    if (input.checked) state.checkedItems.add(index);
+    else state.checkedItems.delete(index);
+    renderChecklistProgress();
+  });
+
+  window.setInterval(() => setActivePhoto(state.activePhoto + 1), 5200);
+
   countrySelect.addEventListener('change', () => {
     const selected = incidentReportingByCountry[countrySelect.value];
     if (!selected) {
@@ -376,6 +504,8 @@ function init() {
   renderTabs();
   renderArticles();
   renderCountryOptions();
+  renderFeaturedPhoto();
+  renderChecklistProgress();
   bindEvents();
 }
 
