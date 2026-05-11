@@ -151,35 +151,35 @@ const incidentReportingByCountry = {
 const openPhotoSources = [
   {
     title: 'Palletised boxes ready for delivery',
-    context: 'Packaging and logistics photo for the public-information theme.',
-    src: 'https://commons.wikimedia.org/wiki/Special:FilePath/American_boxes_palletised.jpg?width=900',
+    context: 'Packaging and logistics photo: stacked cartons ready for delivery to a packer, with no people in frame.',
+    src: 'https://commons.wikimedia.org/wiki/Special:FilePath/American_boxes_palletised.jpg?width=1200',
     page: 'https://commons.wikimedia.org/wiki/File:American_boxes_palletised.jpg',
     credit: 'SimónK / Wikimedia Commons',
     license: 'CC BY-SA 4.0',
   },
   {
-    title: 'Server racks at NERSC',
-    context: 'Real infrastructure photo showing where digital services may depend on safeguards.',
-    src: 'https://commons.wikimedia.org/wiki/Special:FilePath/Front_of_server_racks_at_NERSC.jpg?width=900',
-    page: 'https://commons.wikimedia.org/wiki/File:Front_of_server_racks_at_NERSC.jpg',
-    credit: 'Derrick Coetzee / Wikimedia Commons',
+    title: 'NOIRLab server racks',
+    context: 'No-people infrastructure photo showing the server rooms that digital services depend on.',
+    src: 'https://commons.wikimedia.org/wiki/Special:FilePath/NOIRLab_HQ_Server_Racks_(6V6A0402-CC).jpg?width=1200',
+    page: 'https://commons.wikimedia.org/wiki/File:NOIRLab_HQ_Server_Racks_(6V6A0402-CC).jpg',
+    credit: 'NOIRLab/NSF/AURA/T. Slovinský',
+    license: 'CC BY 4.0',
+  },
+  {
+    title: 'Plastic package sealing machine',
+    context: 'A recent CC0 packaging-machine photo from a Chinese Commons contributor, selected for practical manufacturing context.',
+    src: 'https://commons.wikimedia.org/wiki/Special:FilePath/Plastic_package_sealing_machine.jpg?width=1200',
+    page: 'https://commons.wikimedia.org/wiki/File:Plastic_package_sealing_machine.jpg',
+    credit: 'Fumikas Sagisavas / Wikimedia Commons',
     license: 'CC0 1.0',
   },
   {
-    title: 'Operations center workstations',
-    context: 'Public-domain photo of people monitoring networked systems.',
-    src: 'https://commons.wikimedia.org/wiki/Special:FilePath/210303-F-ZY709-1002_616th_Operations_Center.jpg?width=900',
-    page: 'https://commons.wikimedia.org/wiki/File:210303-F-ZY709-1002_616th_Operations_Center.jpg',
-    credit: 'U.S. Air Force photo by Vincent Childress',
-    license: 'Public domain',
-  },
-  {
-    title: 'Laptop planning during cyber exercise',
-    context: 'Public-domain photo representing shared responsibility and coordination.',
-    src: 'https://commons.wikimedia.org/wiki/Special:FilePath/Neurons_connect_at_US_Army%27s_CyberCenter_of_Excellence_140610-Z-PA893-053.jpg?width=900',
-    page: 'https://commons.wikimedia.org/wiki/File:Neurons_connect_at_US_Army%27s_CyberCenter_of_Excellence_140610-Z-PA893-053.jpg',
-    credit: 'Staff Sgt. Tracy Smith / Georgia National Guard',
-    license: 'Public domain',
+    title: 'Tea-bag packaging line in Korea',
+    context: 'Korean-language Commons upload showing automated packaging equipment without people in the frame.',
+    src: 'https://commons.wikimedia.org/wiki/Special:FilePath/%EB%85%B9%EC%B0%A8%EC%9B%90_%EA%B8%88%EC%82%B0%EA%B3%B5%EC%9E%A5_%ED%8B%B0%EB%B0%B1%ED%8F%AC%EC%9E%A5%EC%84%A4%EB%B9%84_C24%EB%9D%BC%EC%9D%B8_nokchawon_tea_bags_packing_machine_c24_in_geumsan_korea.jpg?width=1200',
+    page: 'https://commons.wikimedia.org/wiki/File:%EB%85%B9%EC%B0%A8%EC%9B%90_%EA%B8%88%EC%82%B0%EA%B3%B5%EC%9E%A5_%ED%8B%B0%EB%B0%B1%ED%8F%AC%EC%9E%A5%EC%84%A4%EB%B9%84_C24%EB%9D%BC%EC%9D%B8_nokchawon_tea_bags_packing_machine_c24_in_geumsan_korea.jpg',
+    credit: 'Calmtea / Wikimedia Commons',
+    license: 'CC BY-SA 4.0',
   },
 ];
 
@@ -207,11 +207,11 @@ function iconSvg(name) {
 function buildTopBar() {
   return `
   <nav id="top-bar" aria-label="Main navigation">
-    <a class="site-id" href="#app">Pacdora.ca Public Notice</a>
+    <a class="site-id" href="#app">Pacdora</a>
     <div class="top-actions">
       <a href="#articles">Open Articles</a>
       <a href="#vendor-checklist">Vendor Checklist</a>
-      <a href="#open-photos">Open Photos</a>
+      <a href="#open-photos">No-people Photos</a>
       <a href="#reporting">Report</a>
       <div class="search-wrapper">
         <span class="search-icon" aria-hidden="true">⌕</span>
@@ -225,12 +225,12 @@ function buildHeader() {
   return `
   <header id="site-header">
     <div class="hero-copy animate-in">
-      <p class="header-eyebrow">Pacdora.ca public information notice — independent site</p>
+      <p class="header-eyebrow">Pacdora public information notice — independent site</p>
       <h1>Plain Pacdora public notice with data security context.</h1>
       <p class="header-subtitle">This independent site is not affiliated with Pacdora, Baoxiaohe, or Packify. It is not a security resource or official support channel; it is a public-information notice that includes plain-language information about data security, privacy, vendor care, and reporting links.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="#independent-notice">Read the notice</a>
-        <a class="btn btn-secondary" href="#open-photos">View open photos</a>
+        <a class="btn btn-secondary" href="#open-photos">View no-people photos</a>
       </div>
     </div>
     <div class="hero-visual animate-in" style="--delay:90ms" aria-label="Moving open-source photo carousel">
@@ -245,7 +245,7 @@ function buildHeader() {
         <div class="hero-dots">${openPhotoSources.map((_, i) => `<button type="button" class="${i === 0 ? 'is-active' : ''}" data-photo-dot="${i}" aria-label="Show photo ${i + 1}"></button>`).join('')}</div>
         <button type="button" data-photo-direction="1" aria-label="Show next photo">›</button>
       </div>
-      <p class="hero-photo-note">Real freely licensed or public-domain photos from Wikimedia Commons; credits and links appear below.</p>
+      <p class="hero-photo-note">No-people, freely licensed or public-domain photos from Wikimedia Commons, including non-English uploads; credits and links appear below.</p>
     </div>
   </header>`;
 }
@@ -314,7 +314,7 @@ function buildMain() {
     </section>
 
     <section id="open-photos" class="section gallery-section animate-in" aria-labelledby="graphics-heading" style="--delay:330ms">
-      <div class="section-heading"><span class="section-num">05</span><div><h2 id="graphics-heading">Real open-source photos and visual context</h2><p class="muted">Actual freely licensed or public-domain photos are paired with lightweight graphics. Select a photo to update the featured image.</p></div></div>
+      <div class="section-heading"><span class="section-num">05</span><div><h2 id="graphics-heading">No-people open photos with packaging context</h2><p class="muted">Freely licensed or public-domain photos were selected from Wikimedia Commons, including non-English file pages, to keep the page concrete without using irrelevant people shots. Select a photo to update the featured image.</p></div></div>
       <div class="photo-gallery">
         <figure id="featured-photo" class="featured-photo"></figure>
         <div class="photo-thumbs" role="list">${openPhotoSources.map((photo, i) => `<button type="button" role="listitem" data-gallery-photo="${i}" class="${i === 0 ? 'is-active' : ''}"><img src="${photo.src}" alt="" loading="lazy" /><span>${photo.title}</span></button>`).join('')}</div>
