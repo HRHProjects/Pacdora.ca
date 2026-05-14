@@ -166,6 +166,43 @@ Allow: /
 User-agent: *
 Allow: /
 
+# == OPTIONAL AI TRAINING CRAWLER POLICY ==
+# These directives discourage known AI training crawlers while preserving
+# normal web search indexing and social sharing previews.
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: ChatGPT-User
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: ClaudeBot
+Disallow: /
+
+User-agent: Claude-Web
+Disallow: /
+
+User-agent: anthropic-ai
+Disallow: /
+
+User-agent: PerplexityBot
+Disallow: /
+
+User-agent: Perplexity-User
+Disallow: /
+
+User-agent: Bytespider
+Disallow: /
+
+User-agent: Diffbot
+Disallow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
 # == CANADIAN GEO-TARGETING POLICY ==
 # TLD: .ca — This domain is bound to Canada (geo.region: CA) via Google Search Console
 # International Targeting. Googlebot Crawl-delay is 0 to maximise SERP freshness
